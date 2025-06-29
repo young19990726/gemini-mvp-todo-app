@@ -1,0 +1,22 @@
+# Python virtual environment
+venv/
+
+# Node modules
+frontend/node_modules/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Database files
+backend/todos.db
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+thumbs.db
+
+# React build output
+frontend/build/
