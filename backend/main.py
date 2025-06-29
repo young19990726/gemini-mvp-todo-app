@@ -8,9 +8,14 @@ sys.path.append(str(project_root))
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.routers import todos, folders # 新增 folders 匯入
+from backend.routers import todos, folders, priority_levels # 新增 priority_levels 匯入
+from backend import models, database, crud, schemas
 
 app = FastAPI()
+
+models.Base.metadata.create_all(bind=database.engine)
+
+
 
 # 設定 CORS
 origins = [
@@ -26,4 +31,5 @@ app.add_middleware(
 )
 
 app.include_router(todos.router)
-app.include_router(folders.router) # 新增 folders 路由
+app.include_router(folders.router)
+app.include_router(priority_levels.router) # 新增 priority_levels 路由

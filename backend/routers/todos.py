@@ -5,25 +5,13 @@ from typing import List, Optional
 from .. import crud, models, schemas
 from ..database import SessionLocal, engine
 
-models.Base.metadata.create_all(bind=engine)
-
-# 初始化資料庫
-def init_db():
-    db = SessionLocal()
-    # 檢查資料庫是否為空
-    if not crud.get_todos(db):
-        initial_todos = [
-            schemas.TodoCreate(title="學習 FastAPI", completed=True, folder_id=None),
-            schemas.TodoCreate(title="建立 React 前端", completed=False, folder_id=None),
-            schemas.TodoCreate(title="連接資料庫", completed=False, folder_id=None),
-        ]
-        for todo in initial_todos:
-            crud.create_todo(db, todo)
-    db.close()
-
-init_db()
-
 router = APIRouter()
+
+
+
+
+
+
 
 # Dependency
 def get_db():
@@ -59,16 +47,15 @@ def read_todo(todo_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Todo not found")
     return db_todo
 
+@router.put("/todos/move", response_model=dict)
+def move_multiple_todos(todos_to_move: schemas.TodoMove, db: Session = Depends(get_db)):
+    print(f"Received move request: {todos_to_move.model_dump_json()}")
+    crud.move_todos_to_folder(db, todo_ids=todos_to_move.todo_ids, folder_id=todos_to_move.folder_id)
+    return {"message": "Todos moved successfully"}
+
 @router.put("/todos/{todo_id}", response_model=schemas.Todo)
 def update_todo(todo_id: int, todo: schemas.TodoCreate, db: Session = Depends(get_db)):
     db_todo = crud.update_todo(db, todo_id=todo_id, todo=todo)
-    if db_todo is None:
-        raise HTTPException(status_code=404, detail="Todo not found")
-    return db_todo
-
-@router.delete("/todos/{todo_id}", response_model=schemas.Todo)
-def delete_todo(todo_id: int, db: Session = Depends(get_db)):
-    db_todo = crud.delete_todo(db, todo_id=todo_id)
     if db_todo is None:
         raise HTTPException(status_code=404, detail="Todo not found")
     return db_todo

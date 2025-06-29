@@ -187,3 +187,81 @@ li .date-picker-input {
     padding: 4px 8px;
     font-size: 0.9em;
 }
+
+.priority-select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.priority-display {
+    width: 40px; /* 調整寬度以容納文字 */
+    height: 20px; /* 固定高度 */
+    border-radius: 3px; /* 輕微圓角 */
+    cursor: pointer;
+    flex-shrink: 0; /* 防止被壓縮 */
+    flex-grow: 0; /* 不要佔用額外空間 */
+    margin-left: 10px; /* 保持與其他元素的間距 */
+    display: flex; /* 使用 flexbox 來置中 */
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+    color: white; /* 文字顏色 */
+    font-size: 12px; /* 字體大小 */
+    font-weight: bold; /* 字體加粗 */
+}
+
+.priority-select-inline {
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+.selected-for-action {
+    background-color: #e6f7ff !important; /* 淺藍色，表示選取用於操作 */
+    border: 1px solid #91d5ff;
+}
+
+.batch-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.delete-selected-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.delete-selected-btn:hover {
+    background-color: #c82333;
+}
+
+.select-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.select-btn:hover {
+    background-color: #0056b3;
+}
+
+.move-to-folder-select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
+}
